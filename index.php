@@ -11,7 +11,6 @@
 </head>
 
 <body style="background-color:#d2d2d2;">
-  <?php include 'conexao.php';?>
   <header>
     <br><br>
   </header>
@@ -21,7 +20,7 @@
         <br>
         <h1 class="text-center">Cadastro de Usuários</h1>
         <div class=" card-body">
-          <form action="cad.php" method="get" class="mb-3">
+          <form action="POO/user_object.php" method="get" class="mb-3">
             <label class="form-label" for="nome">Nome:</label>
             <input class="form-control" type="text" name="nome" id="nome" required>
             <label class="form-label" for="nome">Sobrenome:</label>

@@ -43,14 +43,7 @@
               <th>Editar / Deletar</th>
             </tr>
             <?php
-              function dateFormat($d){
-                $date = explode('-', $d);
-                $newDate = $date[2]."/".$date[1]."/".$date[0];
-                return $newDate;
-              } 
               $busca = $_GET['busca'] ?? ''; 
-              $sql = "SELECT * FROM `cadastro` WHERE `nome` LIKE '%$busca%'";
-              $dados = mysqli_query($mysqli, $sql);
               while ($linha = mysqli_fetch_assoc($dados)){
                 $id = $linha['id'];
                 $nome = $linha['nome'];
@@ -62,7 +55,7 @@
                 echo "<tr>
                       <td>$nome</td>
                       <td>$sobrenome</td>
-                      <td>".dateFormat($nascimento)."</td>
+                      <td>$nascimento</td>
                       <td>$cidade</td>
                       <td>$email</td>
                       <td><a href='update.php?id=$id'>Editar</a> / <a href='delete.php?id=$id'>Deletar</a></td>
