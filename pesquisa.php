@@ -11,7 +11,7 @@
 
 <body style="background-color:#d2d2d2;">
 
-  <?php include 'conexao.php';?>
+
   <header>
     <br><br>
   </header>
@@ -42,26 +42,13 @@
               <th>E-mail</th>
               <th>Editar / Deletar</th>
             </tr>
+
             <?php
-              $busca = $_GET['busca'] ?? ''; 
-              while ($linha = mysqli_fetch_assoc($dados)){
-                $id = $linha['id'];
-                $nome = $linha['nome'];
-                $sobrenome = $linha['sobrenome'];
-                $nascimento = $linha['nascimento'];
-                $cidade = $linha['cidade'];
-                $email = $linha['email'];
-                
-                echo "<tr>
-                      <td>$nome</td>
-                      <td>$sobrenome</td>
-                      <td>$nascimento</td>
-                      <td>$cidade</td>
-                      <td>$email</td>
-                      <td><a href='update.php?id=$id'>Editar</a> / <a href='delete.php?id=$id'>Deletar</a></td>
-                    </tr>";
-                }
+              include_once 'poo\user.php';
+              $user = new User;
+              $user->load($_GET['busca'] ?? '');
             ?>
+
           </table>
         </div>
       </div>

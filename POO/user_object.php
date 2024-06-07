@@ -1,15 +1,17 @@
 <?php 
 
-use User;
+require_once 'user.php';
+require_once 'connection.php';
 
 $object = new User;
 
-$object->setNome($GET_['nome']);
-$object->setSobrenome($GET_['sobrenome']);
-$object->setNascimento($GET_['nascimento']);
-$object->setCidade($GET_['cidade']);
-$object->setEmail($GET_['email']);
+$object->setNome($_GET['nome']);
+$object->setSobrenome($_GET['sobrenome']);
+$object->setNascimento($_GET['nascimento']);
+$object->setCidade($_GET['cidade']);
+$object->setEmail($_GET['email']);
+$object->setOperacao('');
 
-$connection->save($object);
+$object->save('', $object->getNome(), $object->getSobrenome(), $object->getNascimento(), $object->getCidade(), $object->getEmail(),$object->getOperacao());
 
 ?>

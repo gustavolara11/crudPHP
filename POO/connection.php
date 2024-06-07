@@ -9,7 +9,7 @@
       return $con = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
     }
     // lembrar de tentar juntar o CREATE e o UPDATE
-    public function queryC($nome, $sobrenome,$nascimento, $cidade, $email){
+    public function queryC($nome, $sobrenome, $nascimento, $cidade, $email){
       $sqlCreate = "INSERT INTO `cadastro`(`nome`, `sobrenome`, `nascimento`, `cidade`, `email`, `operacao`) 
       VALUES ('$nome', '$sobrenome', '$nascimento', '$cidade', '$email', 'u')";
       $query = mysqli_query($this->getCon(), $sqlCreate);
@@ -20,12 +20,12 @@
       }
     }    
     public function queryR($n){
-      $sqlRead = "SELECT * FROM `cadastro` WHERE `nome` LIKE '%$n%'";
+      $sqlRead = "SELECT * FROM `cadastro` WHERE `nome` LIKE '%$n%' OR `sobrenome` LIKE '%$n%'";
       $query = mysqli_query($this->getCon(), $sqlRead);
       if($query->num_rows == 0){
         echo "Usuário não encontrado.";
       }else{
-        return mysqli_fetch_assoc($query);
+        return $query;
       }
     }    
     public function queryU($id, $nome, $sobrenome,$nascimento, $cidade, $email){

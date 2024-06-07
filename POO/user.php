@@ -1,6 +1,6 @@
 <?php
   
-  use Connection;
+require_once 'Connection.php';
 
 class User {
   protected $id;
@@ -12,8 +12,8 @@ class User {
   protected $operacao;
   
   public function __construct($id = false){
+    $connection = new Connection();
     if($id){
-      $connection = new Connection();
       $data = $connection->queryR($id);
         $this->id = $data['id'];
         $this->nome = $data['nome'];
@@ -34,7 +34,25 @@ class User {
   }
   public function load($id){
     $connection = new Connection();
-    $connection->queryR($id);
+    $data = $connection->queryR($id);
+              while ($dados = mysqli_fetch_assoc($data)){
+                $object = new User;
+                $object->setId($dados['id']);
+                $object->setNome($dados['nome']);
+                $object->setSobrenome($dados['sobrenome']);
+                $object->setNascimento($dados['nascimento']);
+                $object->setCidade($dados['cidade']);
+                $object->setEmail($dados['email']);
+
+                echo "<tr>
+                      <td>".$object->getNome()."</td>
+                      <td>".$object->getSobrenome()."</td>
+                      <td>".$object->getNascimento()."</td>
+                      <td>".$object->getCidade()."</td>
+                      <td>".$object->getEmail()."</td>
+                      <td><a href='update.php?id=".$object->getId()."'>Editar</a> / <a href='delete.php?id=".$object->getId()."'>Deletar</a></td>
+                    </tr>";
+                }
   }
   public function delete($id){
     $connection = new Connection();
@@ -46,44 +64,45 @@ class User {
     return $this->id;
   }
   public function setId($i){
-    $id = $this->$i;
+    $this->id = $i;
   }
   public function getNome(){
     return $this->nome;
   }
   public function setNome($n){
-    $nome = $this->$n;
+    $this->nome = $n;
   }
   public function getSobrenome(){
     return $this->sobrenome;
   }
   public function setSobrenome($s){
-    $sobrenome = $this->$s;
+    $this->sobrenome = $s;
   }
   public function getNascimento(){
-    $date = new DateTime($this->nascimento);
-    return $date->format('d-m-Y'); 
+    // $date = new DateTime($this->nascimento);
+    // return $date->format('d-m-Y');
+    return $this->nascimento;
   }
   public function setNascimento($n){
-    $nascimento = $this->$n;
+    $this->nascimento = $n;
   }
   public function getCidade(){
     return $this->cidade;
   }
   public function setCidade($c){
-    $cidade = $this->$c;
+    $this->cidade = $c;
   }
   public function getEmail(){
     return $this->email;
   }
   public function setEmail($e){
-    $email = $this->$e;
+    $this->email = $e;
   }
   public function getOperacao(){
     return $this->operacao;
   }
   public function setOperacao($o){
-    $operacao = $this->$o;
+    $this->operacao = $o;
   }
 }
 ?>

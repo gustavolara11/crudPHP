@@ -12,8 +12,10 @@
 
 <body style="background-color:#d2d2d2;">
   <?php 
-  include 'conexao.php';
+  include 'connection.php';
    $idup = $_GET['id'];
+   // continuar aqui
+   
    $sql = "SELECT * FROM `cadastro` WHERE `id` = $idup";
    $dados = mysqli_query($mysqli, $sql);
     $linha = mysqli_fetch_assoc($dados);
