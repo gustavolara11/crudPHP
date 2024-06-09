@@ -12,20 +12,10 @@
 
 <body style="background-color:#d2d2d2;">
   <?php 
-  include 'connection.php';
+  include 'poo\user.php';
    $idup = $_GET['id'];
-   // continuar aqui
-   
-   $sql = "SELECT * FROM `cadastro` WHERE `id` = $idup";
-   $dados = mysqli_query($mysqli, $sql);
-    $linha = mysqli_fetch_assoc($dados);
-      $id = $linha['id'];
-      $nome = $linha['nome'];
-      $sobrenome = $linha['sobrenome'];
-      $nascimento = $linha['nascimento'];
-      $cidade = $linha['cidade'];
-      $email = $linha['email'];
-    
+   $user = new User;
+   $user->showUpdate($idup);
   ?>
   <header>
     <br><br>
@@ -36,20 +26,23 @@
         <br>
         <h1 class="text-center">Atualizar Usuários</h1>
         <div class=" card-body">
-          <form action="cad_update.php" method="get" class="mb-3">
-            <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
+          <form action="poo\user_object.php" method="get" class="mb-3">
+            <input type="hidden" name="id" id="id" value="<?php echo $user->getId();?>">
             <label class=" form-label" for="nome">Nome:</label>
-            <input class="form-control" type="text" name="nome" id="nome" value="<?php echo $nome;?>" required>
+            <input class="form-control" type="text" name="nome" id="nome" value="<?php echo $user->getNome();?>"
+              required>
             <label class="form-label" for="nome">Sobrenome:</label>
-            <input class="form-control" type="text" name="sobrenome" id="sobrenome" value="<?php echo $sobrenome;?>"
-              required>
+            <input class="form-control" type="text" name="sobrenome" id="sobrenome"
+              value="<?php echo $user->getSobrenome();?>" required>
             <label class="form-label" for="nome">Nascimento:</label>
-            <input class="form-control" type="date" name="nascimento" id="nascimento" value="<?php echo $nascimento;?>"
-              required>
+            <input class="form-control" type="date" name="nascimento" id="nascimento"
+              value="<?php echo $user->getNascimento();?>" required>
             <label class="form-label" for="nome">Cidade:</label>
-            <input class="form-control" type="text" name="cidade" id="cidade" value="<?php echo $cidade;?>" required>
+            <input class="form-control" type="text" name="cidade" id="cidade" value="<?php echo $user->getCidade();?>"
+              required>
             <label class="form-label" for="nome">E-mail:</label>
-            <input class="form-control" type="text" name="email" id="email" value="<?php echo $email;?>" required>
+            <input class="form-control" type="text" name="email" id="email" value="<?php echo $user->getEmail();?>"
+              required>
             <br>
             <input type="submit" value="Atualizar" class="btn btn-primary btn-lg">
           </form>
@@ -58,7 +51,6 @@
       </div>
     </div>
   </main>
-
 
 </body>
 

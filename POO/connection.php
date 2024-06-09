@@ -22,10 +22,19 @@
     public function queryR($n){
       $sqlRead = "SELECT * FROM `cadastro` WHERE `nome` LIKE '%$n%' OR `sobrenome` LIKE '%$n%'";
       $query = mysqli_query($this->getCon(), $sqlRead);
-      if($query->num_rows == 0){
+      if(empty($query) || $query->num_rows == 0){
         echo "Usuário não encontrado.";
       }else{
-        return $query;
+        return mysqli_fetch_all($query, MYSQLI_ASSOC);
+      }
+    }    
+    public function queryRid($id){
+      $sqlRead = "SELECT * FROM `cadastro` WHERE `id` = $id";
+      $query = mysqli_query($this->getCon(), $sqlRead);
+      if(empty($query) || $query->num_rows == 0){
+        echo "Usuário não encontrado.";
+      }else{
+        return mysqli_fetch_assoc($query);
       }
     }    
     public function queryU($id, $nome, $sobrenome,$nascimento, $cidade, $email){

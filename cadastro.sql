@@ -33,17 +33,18 @@ CREATE TABLE `cadastro` (
   `sobrenome` varchar(140) NOT NULL,
   `nascimento` date NOT NULL,
   `cidade` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `operacao` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `cadastro`
 --
 
-INSERT INTO `cadastro` (`id`, `nome`, `sobrenome`, `nascimento`, `cidade`, `email`) VALUES
-(1, 'Luis gustavo', 'Ferreira Lara', '1988-01-26', 'londrina', 'gustavex2007@gmail.com'),
-(3, 'ana', 'Ferreira Lara', '1996-04-04', 'londrina', 'anatiabia@hotmail.com'),
-(7, 'Pedro Batista', 'Espirito Santo', '2022-11-03', 'Londrina', 'pedrinhoB@hotmail.com');
+INSERT INTO `cadastro` (`id`, `nome`, `sobrenome`, `nascimento`, `cidade`, `email`, `operacao`) VALUES
+(1, 'Luis gustavo', 'Ferreira Lara', '1988-01-26', 'londrina', 'gustavex2007@gmail.com', 'u'),
+(3, 'ana', 'Ferreira Lara', '1996-04-04', 'londrina', 'anatiabia@hotmail.com', 'u'),
+(7, 'Pedro Batista', 'Espirito Santo', '2022-11-03', 'Londrina', 'pedrinhoB@hotmail.com', 'u');
 
 --
 -- Índices para tabelas despejadas

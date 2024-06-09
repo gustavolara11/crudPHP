@@ -32,27 +32,37 @@ class User {
       $connection->queryC($nome, $sobrenome, $nascimento, $cidade, $email);
     }
   }
-  public function load($id){
+  public function load($name){
+    if(isset($name)){
+      $connection = new Connection();
+      $dados = $connection->queryR($name);
+      
+      $arr = array();
+      foreach ($dados as $dado) {
+        $object = new User;
+        $object->setId($dado['id']);
+        $object->setNome($dado['nome']);
+        $object->setSobrenome($dado['sobrenome']);
+        $object->setNascimento($dado['nascimento']);
+        $object->setCidade($dado['cidade']);
+        $object->setEmail($dado['email']);
+        $arr[] = $object;
+      }
+      return $arr;
+    }
+  }
+  //mvc model view controler
+  //factory
+  public function showUpdate($id){
     $connection = new Connection();
-    $data = $connection->queryR($id);
-              while ($dados = mysqli_fetch_assoc($data)){
-                $object = new User;
-                $object->setId($dados['id']);
-                $object->setNome($dados['nome']);
-                $object->setSobrenome($dados['sobrenome']);
-                $object->setNascimento($dados['nascimento']);
-                $object->setCidade($dados['cidade']);
-                $object->setEmail($dados['email']);
-
-                echo "<tr>
-                      <td>".$object->getNome()."</td>
-                      <td>".$object->getSobrenome()."</td>
-                      <td>".$object->getNascimento()."</td>
-                      <td>".$object->getCidade()."</td>
-                      <td>".$object->getEmail()."</td>
-                      <td><a href='update.php?id=".$object->getId()."'>Editar</a> / <a href='delete.php?id=".$object->getId()."'>Deletar</a></td>
-                    </tr>";
-                }
+    $dados = $connection->queryRid($id);
+    
+      $this->setId($dados['id']);
+      $this->setNome($dados['nome']);
+      $this->setSobrenome($dados['sobrenome']);
+      $this->setNascimento($dados['nascimento']);
+      $this->setCidade($dados['cidade']);
+      $this->setEmail($dados['email']);
   }
   public function delete($id){
     $connection = new Connection();
@@ -82,6 +92,11 @@ class User {
     // $date = new DateTime($this->nascimento);
     // return $date->format('d-m-Y');
     return $this->nascimento;
+  }
+  public function getNewNascimento(){
+    $date = new DateTime($this->nascimento);
+    return $date->format('d-m-Y');
+    // return $this->nascimento;
   }
   public function setNascimento($n){
     $this->nascimento = $n;

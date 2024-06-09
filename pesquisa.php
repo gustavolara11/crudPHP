@@ -11,7 +11,6 @@
 
 <body style="background-color:#d2d2d2;">
 
-
   <header>
     <br><br>
   </header>
@@ -46,9 +45,20 @@
             <?php
               include_once 'poo\user.php';
               $user = new User;
-              $user->load($_GET['busca'] ?? '');
+              $list = $user->load($_GET['busca'] ?? '');
+              if(!empty($list)){
+                foreach ($list as $object) {
+                  echo "<tr>
+                        <td>".$object->getNome()."</td>
+                        <td>".$object->getSobrenome()."</td>
+                        <td>".$object->getNewNascimento()."</td>
+                        <td>".$object->getCidade()."</td>
+                        <td>".$object->getEmail()."</td>
+                        <td><a href='update.php?id=".$object->getId()."'>Editar</a> / <a href='poo/user_object.php?del=".$object->getId()."'>Deletar</a></td>
+                      </tr>";
+                }
+              }
             ?>
-
           </table>
         </div>
       </div>
