@@ -9,8 +9,7 @@ class User {
   protected $nascimento;
   protected $cidade;
   protected $email;
-  protected $operacao;
-  
+    
   public function __construct($id = false){
     $connection = new Connection();
     if($id){
@@ -21,12 +20,11 @@ class User {
         $this->nascimento = $data['nascimento'];
         $this->cidade = $data['cidade'];
         $this->email = $data['email'];
-        $this->operacao = $data['operacao'];
     }
   }
-  public function save($id, $nome, $sobrenome, $nascimento, $cidade, $email, $operacao){
+  public function save($id, $nome, $sobrenome, $nascimento, $cidade, $email){
     $connection = new Connection();
-    if($operacao == 'u'){
+    if(!empty($id)){
       $connection->queryU($id, $nome, $sobrenome, $nascimento, $cidade, $email);
     }else{
       $connection->queryC($nome, $sobrenome, $nascimento, $cidade, $email);
@@ -112,12 +110,6 @@ class User {
   }
   public function setEmail($e){
     $this->email = $e;
-  }
-  public function getOperacao(){
-    return $this->operacao;
-  }
-  public function setOperacao($o){
-    $this->operacao = $o;
   }
 }
 ?>

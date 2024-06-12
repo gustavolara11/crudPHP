@@ -10,8 +10,8 @@
     }
     // lembrar de tentar juntar o CREATE e o UPDATE
     public function queryC($nome, $sobrenome, $nascimento, $cidade, $email){
-      $sqlCreate = "INSERT INTO `cadastro`(`nome`, `sobrenome`, `nascimento`, `cidade`, `email`, `operacao`) 
-      VALUES ('$nome', '$sobrenome', '$nascimento', '$cidade', '$email', 'u')";
+      $sqlCreate = "INSERT INTO `cadastro`(`nome`, `sobrenome`, `nascimento`, `cidade`, `email`) 
+      VALUES ('$nome', '$sobrenome', '$nascimento', '$cidade', '$email')";
       $query = mysqli_query($this->getCon(), $sqlCreate);
       if($query){
         echo "Usuário criado com sucesso.";
